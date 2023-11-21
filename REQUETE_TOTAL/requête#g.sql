@@ -2,7 +2,7 @@
 
 -- Sélection des colonnes du film tournés, l'identité de l'acteur, son rôle et l'année de sortie
 SELECT 
-    film.titre AS titre,
+    film.titre AS films,
 
     -- Afficher le prénom et le nom de l'acteur dans la même colonne
     CONCAT(personne.prenom, ' ', personne.nom) AS Acteur,
@@ -25,6 +25,9 @@ INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
 
 -- Jointure avec la table personne sur la relation d'ID de la personne
 INNER JOIN personne ON acteur.id_acteur = personne.id_personne
+
+-- Filtre pour sélectionner un acteur en particulier
+WHERE acteur.id_acteur = 1
 
 -- Trier les résultats du film le plus récent au plus ancien
 ORDER BY dateSortie DESC;

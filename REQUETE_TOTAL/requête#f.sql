@@ -19,6 +19,7 @@ INNER JOIN personne ON acteur.id_personne = personne.id_personne
 -- Jointure avec la table film sur la relation d'ID du film
 INNER JOIN film ON casting.id_film = film.id_film
 
--- Trier les résultats par film
-ORDER BY film.id_film;
+-- Filtre pour sélectionner un film en particulier
+WHERE film.id_film = 2;
+
 

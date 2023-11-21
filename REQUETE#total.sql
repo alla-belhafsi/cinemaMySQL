@@ -140,8 +140,8 @@ INNER JOIN personne ON acteur.id_personne = personne.id_personne
 -- Jointure avec la table film sur la relation d'ID du film
 INNER JOIN film ON casting.id_film = film.id_film
 
--- Trier les résultats par film
-ORDER BY film.id_film;
+-- Filtre pour sélectionner un film en particulier
+WHERE film.id_film = 2;
 
 
 ---------------------------------------------------------------------------------
@@ -151,7 +151,7 @@ ORDER BY film.id_film;
 
 -- Sélection des colonnes du film tournés, l'identité de l'acteur, son rôle et l'année de sortie
 SELECT 
-    film.titre AS titre,
+    film.titre AS films,
 
     -- Afficher le prénom et le nom de l'acteur dans la même colonne
     CONCAT(personne.prenom, ' ', personne.nom) AS Acteur,
@@ -175,8 +175,12 @@ INNER JOIN acteur ON casting.id_acteur = acteur.id_acteur
 -- Jointure avec la table personne sur la relation d'ID de la personne
 INNER JOIN personne ON acteur.id_acteur = personne.id_personne
 
+-- Filtre pour sélectionner un acteur en particulier
+WHERE acteur.id_acteur = 1
+
 -- Trier les résultats du film le plus récent au plus ancien
 ORDER BY dateSortie DESC;
+
 
 
 ---------------------------------------------------------------------------------
@@ -274,7 +278,9 @@ ORDER BY AgeRev ASC;
 -- Sélection des colonnes de l'identité des acteurs
 SELECT 
     CONCAT(personne.prenom, ' ', personne.nom) AS Acteurs, 
-    COUNT(casting.id_film) AS nbFilms
+    
+    -- Compte le nombre d'ID acteur 
+    COUNT(casting.id_acteur) AS nbFilms
 
 -- Tables utilisées de la requête
 FROM casting
@@ -289,4 +295,4 @@ INNER JOIN personne ON acteur.id_personne = personne.id_personne
 GROUP BY acteur.id_acteur
 
 -- Application des conditons aux résultats
-HAVING COUNT(casting.id_film) >= 3;
+HAVING nbFilms >= 3;

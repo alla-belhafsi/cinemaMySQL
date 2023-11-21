@@ -1,7 +1,11 @@
 -- QUESTION L ---  Acteurs ayant joué dans 3 films ou plus
 
 -- Sélection des colonnes de l'identité des acteurs
-SELECT CONCAT(personne.prenom, ' ', personne.nom) AS Acteurs, COUNT(casting.id_film) AS nbFilms
+SELECT 
+    CONCAT(personne.prenom, ' ', personne.nom) AS Acteurs, 
+    
+    -- Compte le nombre d'ID acteur 
+    COUNT(casting.id_acteur) AS nbFilms
 
 -- Tables utilisées de la requête
 FROM casting
@@ -16,4 +20,4 @@ INNER JOIN personne ON acteur.id_personne = personne.id_personne
 GROUP BY acteur.id_acteur
 
 -- Application des conditons aux résultats
-HAVING COUNT(casting.id_film) >= 3;
+HAVING nbFilms >= 3;
